@@ -1,21 +1,21 @@
 const screens = {auth:document.querySelector('#authScreen'),connect:document.querySelector('#connectScreen'),app:document.querySelector('#appScreen')};
 const showScreen = name => { Object.values(screens).forEach(s=>s.classList.remove('active')); screens[name].classList.add('active'); };
 window.showPrainScreen = showScreen;
-document.querySelector('#signupForm').addEventListener('submit',e=>{e.preventDefault();showScreen('connect')});
-document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showScreen('connect')));
+document.querySelector('#signupForm').addEventListener('submit',e=>{e.preventDefault();showScreen('app')});
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showScreen('app')));
 const installButton = document.querySelector('#installDiscordBot');
 const installMessage = document.querySelector('#installMessage');
 let installStarted = false;
 installButton.addEventListener('click', () => {
   if (installStarted) {
-    showScreen('connect');
+    showScreen('app');
     return;
   }
 
   const clientId = window.PRAIN_CONFIG?.discordClientId;
   if (!clientId || clientId === 'YOUR_DISCORD_APPLICATION_ID') {
-    installMessage.textContent = '미리보기 모드로 다음 화면을 엽니다.';
-    showScreen('connect');
+    installMessage.textContent = '미리보기 모드로 대시보드를 엽니다.';
+    showScreen('app');
     return;
   }
 
@@ -31,6 +31,7 @@ installButton.addEventListener('click', () => {
   installMessage.textContent = 'Discord 창에서 서버를 선택하고 승인한 뒤 이 버튼을 다시 눌러 주세요.';
 });
 document.querySelector('#enterDashboard').addEventListener('click',()=>showScreen('app'));
+document.querySelector('#openProjectSetup').addEventListener('click',()=>showScreen('connect'));
 document.querySelectorAll('.link-btn,.channel-btn').forEach(b=>b.addEventListener('click',()=>{b.textContent=b.textContent==='연결하기'?'연결됨':'변경 완료';b.closest('.tool').classList.add('connected')}));
 const names={dashboard:'아이디어 보드',ai:'AI 채팅',meeting:'회의 기록',community:'커뮤니티'};
 function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===name+'View'));document.querySelectorAll('.side-link').forEach(b=>b.classList.toggle('active',b.dataset.view===name));document.querySelector('#viewTitle').textContent=names[name]}
