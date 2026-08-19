@@ -513,24 +513,34 @@ button:active {
 }
 
 .signup-card h1 {
+  position: relative;
   color: #17233c;
   font-size: 26px;
   text-transform: lowercase;
 }
 
 .signup-card h1::before {
-  content: "p";
-  width: 30px;
-  height: 30px;
-  margin: 0 auto 8px;
-  display: grid;
-  place-items: center;
-  border: 3px solid #42a8ed;
-  border-radius: 9px 9px 9px 2px;
-  color: #42a8ed;
-  font-size: 20px;
-  font-weight: 900;
-  line-height: 1;
+  content: "";
+  width: 42px;
+  height: 48px;
+  margin: 0 auto 6px;
+  display: block;
+  background:
+    linear-gradient(#42a8ed, #42a8ed) 7px 13px / 5px 35px no-repeat,
+    radial-gradient(circle at 22px 15px, transparent 0 7px, #42a8ed 8px 14px, transparent 15px);
+}
+
+.signup-card h1::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 13px;
+  height: 8px;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+  transform: translateX(-25%) rotate(-45deg);
+  transform-origin: center;
 }
 
 .signup-card > p {
