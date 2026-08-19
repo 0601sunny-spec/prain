@@ -7,6 +7,32 @@ const app = express();
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.PORT || 3000);
 
+app.use('/.proxy/backend', async (req, res) => {
+  const backendUrl = process.env.BACKEND_URL;
+  if (!backendUrl) return res.status(503).json({ error: 'BACKEND_URL is not configured' });
+
+  const target = new URL(req.originalUrl.replace('/.proxy/backend', '') || '/', backendUrl);
+  const headers = { ...req.headers };
+  delete headers.host;
+
+  try {
+    const response = await fetch(target, {
+      method: req.method,
+      headers,
+      body: ['GET', 'HEAD'].includes(req.method) ? undefined : req,
+      duplex: 'half',
+    });
+
+    res.status(response.status);
+    response.headers.forEach((value, key) => {
+      if (!['content-encoding', 'transfer-encoding'].includes(key.toLowerCase())) res.setHeader(key, value);
+    });
+    res.send(Buffer.from(await response.arrayBuffer()));
+  } catch (error) {
+    res.status(502).json({ error: 'Backend proxy request failed', detail: error.message });
+  }
+});
+
 app.use(express.json());
 
 app.post(['/api/token', '/.proxy/api/token'], async (req, res) => {
@@ -31,5 +57,5 @@ app.post(['/api/token', '/.proxy/api/token'], async (req, res) => {
 });
 
 app.use(express.static(path.join(root, 'dist')));
-app.get('*', (_req, res) => res.sendFile(path.join(root, 'dist', 'index.html')));
+app.get(/.*/, (_req, res) => res.sendFile(path.join(root, 'dist', 'index.html')));
 app.listen(port, () => console.log(`Prain Activity listening on ${port}`));

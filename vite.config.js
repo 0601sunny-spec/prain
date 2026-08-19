@@ -22,6 +22,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/\.proxy/, ''),
         },
+        '/.proxy/backend': {
+          target: env.VITE_BACKEND_URL || env.BACKEND_URL || 'http://127.0.0.1:8000',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/\.proxy\/backend/, ''),
+        },
       },
     },
   };
