@@ -467,6 +467,7 @@ button:active {
 .auth-screen {
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(227, 246, 255, .92), rgba(255, 250, 226, .88)),
@@ -498,6 +499,47 @@ button:active {
 .corner-label {
   color: #17233c;
   opacity: .7;
+}
+
+.auth-brand {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin-bottom: 26px;
+  color: #17233c;
+}
+
+.prain-logo {
+  width: 64px;
+  height: 64px;
+  overflow: visible;
+}
+
+.prain-logo-mark,
+.prain-logo-check {
+  fill: none;
+  stroke: #3fa9ee;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prain-logo-mark {
+  stroke-width: 7;
+}
+
+.prain-logo-check {
+  stroke-width: 6;
+}
+
+.auth-brand h1 {
+  margin: 0;
+  color: #17233c;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 .signup-card {
