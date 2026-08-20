@@ -1837,3 +1837,97 @@ button:active {
     grid-template-columns: 1fr;
   }
 }
+
+.auth-screen {
+  min-height: 100svh;
+  padding: clamp(24px, 5vh, 56px) 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.auth-brand {
+  margin-top: auto;
+}
+
+.signup-card {
+  margin-bottom: auto;
+}
+
+@media (max-height: 820px) {
+  .auth-brand {
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .prain-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .auth-brand h1 {
+    font-size: 32px;
+  }
+
+  .signup-card {
+    padding: 30px 38px 28px;
+  }
+
+  .signup-card > p {
+    margin-bottom: 14px;
+  }
+
+  .api-chip,
+  .auth-mode {
+    margin-bottom: 10px;
+  }
+
+  .auth-btn,
+  .start-btn,
+  .dashboard-btn {
+    min-height: 40px;
+    margin-bottom: 10px;
+  }
+
+  .signup-card input[type=email],
+  .signup-card input[type=password],
+  .signup-card input[type=text] {
+    height: 40px;
+    margin: 5px 0;
+  }
+
+  .signup-card label {
+    margin: 9px 0 14px;
+  }
+}
+
+@media (max-height: 680px) {
+  .auth-screen {
+    padding-block: 18px;
+  }
+
+  .auth-brand {
+    margin-bottom: 12px;
+  }
+
+  .prain-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .auth-brand h1 {
+    font-size: 28px;
+  }
+
+  .signup-card {
+    padding: 24px 30px 22px;
+  }
+
+  .signup-card > p,
+  .install-message {
+    margin-bottom: 10px !important;
+  }
+
+  .divider {
+    font-size: 10px;
+  }
+}
